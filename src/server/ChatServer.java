@@ -18,20 +18,15 @@ public class ChatServer {
 	public ChatServer(int port) {
 		this.port = port;
 	}
-
 	public void execute() {
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
-
 			System.out.println("Chat Server is listening on port " + port);
-
 			while (true) {
 				Socket socket = serverSocket.accept();
 				System.out.println("New user connected");
-
 				UserThread newUser = new UserThread(socket, this);
 				userThreads.add(newUser);
 				newUser.start();
-
 			}
 
 		} catch (IOException ex) {
@@ -52,7 +47,6 @@ public class ChatServer {
 	void broadcast(String message, UserThread excludeUser) {
 		for (UserThread aUser : userThreads) {
 			if (aUser != excludeUser) {
-				System.out.println(aUser+ " must be different "+ excludeUser);
 				aUser.sendMessage(message);
 			}
 		}

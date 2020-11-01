@@ -40,13 +40,16 @@ public class UserThread extends Thread {
 
 			do {
 				clientMessage = reader.readLine();
+				if(clientMessage.equals("user left so he got disconnected") ){
+					break;
+				}
 				serverMessage = "[" + userName + "]: " + clientMessage;
 				System.out.println("Message to send:"+ serverMessage);
 				server.broadcast(serverMessage, this);
-			}while (!clientMessage.equals("bye")); // ao clicar em sair da sala enviamos um código
+			}while(true); // ao clicar em sair da sala enviamos um código
 			serverMessage = userName + " has quitted.";
 			server.broadcast(serverMessage, this);
-
+			reader.close();
 		} catch (IOException ex) {
 			System.out.println("Error in UserThread: " + ex.getMessage());
 			ex.printStackTrace();

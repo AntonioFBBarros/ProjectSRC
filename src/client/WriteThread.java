@@ -35,6 +35,8 @@ public class WriteThread extends Thread {
 		}
 	}
 
+
+
 	public void run() {
 		if(flag==1){
 			writer.println(client.getUserName()); // first time joining

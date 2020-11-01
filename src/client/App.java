@@ -1,8 +1,8 @@
 package client;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -34,7 +34,6 @@ public class App {
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("------->ss"+socket);
                 new WriteThread(socket,client, msgToSend.getText(),0,textArea1).start();
                 msgToSend.setText("");
             }
@@ -44,13 +43,18 @@ public class App {
 
 
     public void start() {
-
         System.out.println("---->passed"+socket);
         JFrame frame = new JFrame("App");
         frame.setContentPane(panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500);
         frame.setVisible(true);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                System.out.println("entered here");
+                new WriteThread(socket,client,"user left so he got disconnected",0,textArea1).start(); //leave msg mandada automaticamente quando fecha
+            }
+        });
     }
 
     /*private static void listen()  {

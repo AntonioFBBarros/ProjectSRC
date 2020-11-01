@@ -35,7 +35,6 @@ public class ChatClient {
 			System.out.println("Connected to the chat server");
 			App app=new App(socket,this);
 			new ReadThread(socket, this,app.textArea1).start();
-
 		} catch (UnknownHostException ex) {
 			System.out.println("Server not found: " + ex.getMessage());
 		} catch (IOException ex) {
