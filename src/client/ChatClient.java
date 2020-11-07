@@ -55,8 +55,10 @@ public class ChatClient {
 	public static void main(String[] args) {
 		String hostname = "localhost";
 		int port = 30002;
-		ChatClient client = new ChatClient(hostname, port);
-		client.execute();
+		Lobby lobby=new Lobby();
+		lobby.start();
+		//ChatClient client = new ChatClient(hostname, port);
+		//client.execute();
 	}
 
 
